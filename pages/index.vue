@@ -3,20 +3,34 @@
     div
       Logo
       h1.title WaterLogger
-      // TODO: don't say finna drink
-      h2.subtitle finna drink.
-      .links
-        a.button--green(href="https://nuxtjs.org/", target="_blank") Documentation
-        a.button--grey(href="https://github.com/nuxt/nuxt.js", target="_blank") GitHub
+      input.login-field(v-model="userEmail", placeholder="Email")
+      br
+      input.login-field(v-model="userPassword", placeholder="Password")
+      br
+      button.button--grey(@click="attemptLogin") Login
+      p.subtext Don't have an account? 
+        // TODO: update href
+        a.subtext-link(href="https://github.com/nuxt/nuxt.js", target="_blank") Sign up
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
 
 export default {
+  data() {
+    return {
+      userEmail: "",
+      userPassword: "",
+    }
+  },
   components: {
     Logo
-  }
+  },
+  methods: {
+    attemptLogin: function (event) {
+      console.log("received login attempt:", this.userEmail, this.userPassword)
+    },
+  },
 }
 </script>
 
@@ -38,17 +52,38 @@ export default {
   font-size: 100px;
   color: #35495e;
   letter-spacing: 1px;
+  margin: 0px 0px 20px 0px;
 }
 
-.subtitle {
+.subtext {
   font-weight: 300;
-  font-size: 42px;
+  font-size: 20px;
   color: #526488;
-  word-spacing: 5px;
+  word-spacing: 2px;
+  padding-bottom: 15px;
+  padding: 10px;
+}
+
+.subtext-link {
+  font-weight: 300;
+  font-size: 20px;
+  color: #6284ee;
+  word-spacing: 2px;
   padding-bottom: 15px;
 }
 
 .links {
   padding-top: 15px;
+}
+
+.login-field {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid gray;
+  color: gray;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin: 0px 0px 10px 0px;
+  width: 300px;
 }
 </style>
