@@ -3,9 +3,9 @@
     div
       Logo
       h1.title WaterLogger
-      input.login-field(v-model="userEmail", placeholder="Email")
+      input.login-field(v-model="userEmail", type="text", placeholder="Email")
       br
-      input.login-field(v-model="userPassword", placeholder="Password")
+      input.login-field(v-model="userPassword", type="password", placeholder="Password")
       br
       button.button--grey(@click="attemptLogin") Login
       p.subtext Don't have an account? 
