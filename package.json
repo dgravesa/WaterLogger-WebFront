@@ -15,7 +15,9 @@
     "@nuxtjs/axios": "^5.3.6"
   },
   "devDependencies": {
+    "node-sass": "^4.13.1",
     "pug": "^2.0.3",
-    "pug-plain-loader": "^1.0.0"
+    "pug-plain-loader": "^1.0.0",
+    "sass-loader": "^8.0.2"
   }
 }

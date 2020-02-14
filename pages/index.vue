@@ -1,26 +1,27 @@
 <template lang="pug">
   .container
-    div(v-if="loggedInUser == ''")
-      Logo
-      h1.title WaterLogger
+    .login-screen(v-if="loggedInUser == ''")
+      .logo-title
+        Logo
+        h1.title WaterLogger
 
-      input.login-field(v-model="userEmail", type="text", placeholder="Email")
-      br
-      input.login-field(v-model="userPassword", type="password", placeholder="Password")
-      br
-      button.button--grey(@click="attemptLogin") Login
-
-      p.error-message(v-if="loginErrorMessage != ''") {{loginErrorMessage}}
+      .login-console
+        input.login-field(v-model="userEmail", type="text", placeholder="Email")
+        br
+        input.login-field(v-model="userPassword", type="password", placeholder="Password")
+        br
+        button.button-blue(@click="attemptLogin") Login
+        p.error-message(v-if="loginErrorMessage != ''") {{loginErrorMessage}}
 
       p.subtext Don't have an account? 
         // TODO: update href
         a.subtext-link(href="https://github.com/nuxt/nuxt.js", target="_blank") Sign up
 
     // TODO: best for these to get moved to their own components
-    div(v-else)
-      h1.title Hello, {{loggedInUser}}!
+    .home-screen(v-else)
+      h1.greeting Hello, {{loggedInUser}}!
       p.subtext Today's total: {{totalToday}}
-      button.button--grey(@click="logout") Logout
+      button.button-blue(@click="logout") Logout
 </template>
 
 <script>
@@ -72,64 +73,67 @@ export default {
 }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+<style lang="sass">
+.container
+  margin: 0 auto
+  min-height: 100vh
+  display: flex
+  justify-content: center
+  align-items: center
+  text-align: center
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-  margin: 0px 0px 20px 0px;
-}
+.logo-title
+  padding-bottom: 20px
 
-.subtext {
-  font-weight: 300;
-  font-size: 20px;
-  color: #526488;
-  word-spacing: 2px;
-  padding-bottom: 15px;
-  padding: 10px;
-}
+  .title
+    font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
+    display: block
+    font-weight: 300
+    font-size: 100px
+    color: #35495e
+    letter-spacing: 1px
 
-.subtext-link {
-  font-weight: 300;
-  font-size: 20px;
-  color: #6284ee;
-  word-spacing: 2px;
-  padding-bottom: 15px;
-}
+.home-screen
+  .greeting
+    font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
+    display: block
+    font-weight: 300
+    font-size: 60px
+    color: #35495e
+    letter-spacing: 1px
 
-.links {
-  padding-top: 15px;
-}
+.subtext
+  font-weight: 300
+  font-size: 20px
+  color: #526488
+  word-spacing: 2px
+  padding-bottom: 15px
+  padding: 10px
 
-.login-field {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid gray;
-  color: gray;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin: 0px 0px 10px 0px;
-  width: 300px;
-}
+.subtext-link
+  font-weight: 300
+  font-size: 20px
+  color: #6284ee
+  word-spacing: 2px
+  padding-bottom: 15px
 
-.error-message {
-  font-weight: 300;
-  font-size: 18px;
-  color: indianred;
-  word-spacing: 2px;
-  padding-top: 10px;
-}
+.links
+  padding-top: 15px
+
+.login-field
+  display: inline-block
+  border-radius: 4px
+  border: 1px solid gray
+  color: gray
+  text-decoration: none
+  padding: 10px 30px
+  margin: 0px 0px 10px 0px
+  width: 300px
+
+.error-message
+  font-weight: 300
+  font-size: 18px
+  color: indianred
+  word-spacing: 2px
+  padding-top: 10px
 </style>
