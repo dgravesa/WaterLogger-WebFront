@@ -30,15 +30,34 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Logo from '~/components/Logo.vue';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 export default {
+  created: function () {
+    if (!firebase.apps.length) {
+      // Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDzD86xyibaqeG3cx8NDlsXLGK7ll0R930",
+        authDomain: "waterlogger.firebaseapp.com",
+        databaseURL: "https://waterlogger.firebaseio.com",
+        projectId: "waterlogger",
+        storageBucket: "waterlogger.appspot.com",
+        messagingSenderId: "518721725341",
+        appId: "1:518721725341:web:25d127381cb58c10184574",
+        measurementId: "G-GW5GP4WF9M"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    }
+  },
   data() {
     return {
       userEmail: '',
       userPassword: '',
       loginErrorMessage: '',
-      loggedInUser: '', // TODO: change this when Firebase auth is up and going
+      loggedInUser: '',
       drinkLogs: [  // TODO: pull this from server
         { time: "", amount: 7.5 },
         { time: "", amount: 16 },
@@ -58,21 +77,27 @@ export default {
   },
   methods: {
     attemptLogin: function (event) {
-      // TODO: make validation logic depend on an actual authentication call
-      // For now, this just says invalid when supposed email address is missing an @ symbol
-      if (this.userEmail.includes("@")) {
-        this.loggedInUser = this.userEmail;
-        this.loginErrorMessage = '';
+      this.loginErrorMessage = '';
+      firebase.auth().signInWithEmailAndPassword(this.userEmail, this.userPassword)
+        .then((result) => {
+          this.loggedInUser = result.user.email;
+        })
+        .catch((error) => {
+          this.loginErrorMessage = 'Invalid email or password.';
+        })
 
-        // simulate login success for now
-        this.userEmail = '';
-        this.userPassword = '';
-      } else {
-        this.loginErrorMessage = 'Invalid email or password.';
-      }
+      // reset login form fields
+      this.userEmail = '';
+      this.userPassword = '';
     },
-    logout: function(event) {
-      this.loggedInUser = '';
+    logout: function (event) {
+      firebase.auth().signOut()
+        .then(() => {
+          this.loggedInUser = '';
+        })
+        .catch((error) => {
+          console.log(error);
+        })
     }
   },
 }
