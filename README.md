@@ -1,4 +1,6 @@
-# waterlogger
+<img src="static/waterlogger.jpg" width=250>
+
+# WaterLogger
 
 > Web front for WaterLogger service.
 
