@@ -13,15 +13,20 @@
         button.button-blue(@click="attemptLogin") Login
         p.error-message(v-if="loginErrorMessage != ''") {{loginErrorMessage}}
 
-      p.subtext Don't have an account? 
-        // TODO: update href
-        a.subtext-link(href="https://github.com/nuxt/nuxt.js", target="_blank") Sign up
+      // TODO: add this back once there's a create user page to reference
+      //- p.subtext Don't have an account? 
+      //-   // TODO: update href
+      //-   a.subtext-link(href="https://github.com/nuxt/nuxt.js", target="_blank") Sign up
 
     // TODO: best for these to get moved to their own components
     .home-screen(v-else)
-      h1.greeting Hello, {{loggedInUser}}!
-      p.subtext Today's total: {{totalToday}}
-      button.button-blue(@click="logout") Logout
+      .user-greeting
+        h1.greeting Hello, {{loggedInUser}}!
+      .user-info-display
+        p.total-today-text Today's total: {{totalToday}}
+
+      .user-logout
+        button.button-blue(@click="logout") Logout
 </template>
 
 <script>
@@ -82,58 +87,66 @@ export default {
   align-items: center
   text-align: center
 
-.logo-title
-  padding-bottom: 20px
+$basic-text-color: #35495e
 
-  .title
-    font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
-    display: block
-    font-weight: 300
-    font-size: 100px
-    color: #35495e
-    letter-spacing: 1px
+%text-shared
+  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
+  display: block
+  font-weight: 300
+  letter-spacing: 1px
+
+=text-mixin($color, $font-size)
+  @extend %text-shared
+  color: $color
+  font-size: $font-size
+
+.login-screen
+  .logo-title
+    padding-bottom: 20px
+
+    .title
+      +text-mixin($basic-text-color, 100px)
+
+  .login-console
+    .login-field
+      display: inline-block
+      border-radius: 4px
+      border: 1px solid gray
+      color: gray
+      text-decoration: none
+      padding: 10px 30px
+      margin: 0px 0px 10px 0px
+      width: 300px
+
+    .error-message
+      +text-mixin(indianred, 18px)
+      padding-top: 10px
 
 .home-screen
-  .greeting
-    font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
-    display: block
-    font-weight: 300
-    font-size: 60px
-    color: #35495e
-    letter-spacing: 1px
+  .user-greeting
+    margin: 10px
+    .greeting
+      +text-mixin($basic-text-color, 66px)
 
-.subtext
-  font-weight: 300
-  font-size: 20px
-  color: #526488
-  word-spacing: 2px
-  padding-bottom: 15px
-  padding: 10px
+  .user-info-display
+    .total-today-text
+      +text-mixin($basic-text-color, 48px)
 
-.subtext-link
-  font-weight: 300
-  font-size: 20px
-  color: #6284ee
-  word-spacing: 2px
-  padding-bottom: 15px
+  .user-logout
+    margin: 20px
 
-.links
-  padding-top: 15px
+// .subtext
+//   font-weight: 300
+//   font-size: 20px
+//   color: #526488
+//   word-spacing: 2px
+//   padding-bottom: 15px
+//   padding: 10px
 
-.login-field
-  display: inline-block
-  border-radius: 4px
-  border: 1px solid gray
-  color: gray
-  text-decoration: none
-  padding: 10px 30px
-  margin: 0px 0px 10px 0px
-  width: 300px
-
-.error-message
-  font-weight: 300
-  font-size: 18px
-  color: indianred
-  word-spacing: 2px
-  padding-top: 10px
+// .subtext-link
+//   font-weight: 300
+//   font-size: 20px
+//   color: #6284ee
+//   word-spacing: 2px
+//   padding-bottom: 15px
 </style>
