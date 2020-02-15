@@ -34,21 +34,12 @@ import Logo from '~/components/Logo.vue';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
+// retrieve Firebase client config from local file
+import firebaseConfig from '~/firebase.config.js';
+
 export default {
   created: function () {
     if (!firebase.apps.length) {
-      // Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyDzD86xyibaqeG3cx8NDlsXLGK7ll0R930",
-        authDomain: "waterlogger.firebaseapp.com",
-        databaseURL: "https://waterlogger.firebaseio.com",
-        projectId: "waterlogger",
-        storageBucket: "waterlogger.appspot.com",
-        messagingSenderId: "518721725341",
-        appId: "1:518721725341:web:25d127381cb58c10184574",
-        measurementId: "G-GW5GP4WF9M"
-      };
-      // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
     }
   },
@@ -70,6 +61,9 @@ export default {
       return this.drinkLogs.reduce((total, drinklog) => {
         return total + drinklog.amount;
       }, 0);
+    },
+    userIsLoggedIn: function() {
+      return firebase.auth().user != null
     }
   },
   components: {
