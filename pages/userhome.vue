@@ -13,12 +13,7 @@
 import { auth } from '~/plugins/firebase';
 
 export default {
-  beforeCreate: function() {
-    // TODO: accomplish this with middleware
-    if (!auth.currentUser) {
-      this.$router.push('/')
-    }
-  },
+  // TODO: add middleware to redirect to login if user is not set in store
   data() {
     return {
       drinkLogs: [  // TODO: pull this from server
@@ -30,8 +25,7 @@ export default {
   },
   computed: {
     loggedInUser: function() {
-      let user = auth.currentUser;
-      return user ? user.email : '';
+      return this.$store.state.user.id;
     },
     totalToday: function () {
       return this.drinkLogs.reduce((total, drinklog) => {
