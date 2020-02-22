@@ -10,7 +10,7 @@
 <script>
 import Logo from '~/components/Logo.vue';
 import LoginConsole from '~/components/LoginConsole.vue';
-import firebase from 'firebase';
+import { auth } from '~/plugins/firebase';
 
 export default {
   data() {
@@ -24,7 +24,7 @@ export default {
   methods: {
     attemptLogin: function (email, password) {
       this.loginErrorMessage = '';
-      firebase.auth().signInWithEmailAndPassword(email, password)
+      auth.signInWithEmailAndPassword(email, password)
         .then((result) => {
           // go to user home page
           this.$router.push('/userhome');

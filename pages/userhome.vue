@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import firebase from 'firebase';
+import { auth } from '~/plugins/firebase';
 
 export default {
   beforeCreate: function() {
     // TODO: accomplish this with middleware
-    if (!firebase.auth().currentUser) {
+    if (!auth.currentUser) {
       this.$router.push('/')
     }
   },
@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     loggedInUser: function() {
-      let user = firebase.auth().currentUser;
+      let user = auth.currentUser;
       return user ? user.email : '';
     },
     totalToday: function () {
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     logout: function (event) {
-      firebase.auth().signOut()
+      auth.signOut()
         .then(() => {
           // route to login page
           this.$router.push('/')
