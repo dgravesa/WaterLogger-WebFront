@@ -13,7 +13,7 @@
 import { auth } from '~/plugins/firebase';
 
 export default {
-  // TODO: add middleware to redirect to login if user is not set in store
+  middleware: 'authenticated',
   data() {
     return {
       drinkLogs: [  // TODO: pull this from server
@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     loggedInUser: function() {
-      return this.$store.state.user.id;
+      return this.$store.state.user.id || '';
     },
     totalToday: function () {
       return this.drinkLogs.reduce((total, drinklog) => {
