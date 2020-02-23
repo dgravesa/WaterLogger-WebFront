@@ -51,18 +51,31 @@ export default {
 <style lang="sass" scoped>
 @import '~/assets/shared-text'
 
+.container
+  margin: 80px auto
+  min-height: 100vh
+  display: block
+  justify-content: center
+  align-items: center
+  text-align: center
+
 .home-screen
+  display: block
+  align-items: center
+  justify-content: center
+  text-align: center
+  margin: 80px auto
+
   .user-greeting
-    margin: 10px
     .greeting
-      +text-mixin($basic-text-color, 66px)
+      +text-mixin($basic-text-color, 48px)
 
   .user-info-display
     .total-today-text
-      +text-mixin($basic-text-color, 48px)
+      +text-mixin($basic-text-color, 40px)
     .retrievelogs-error-text
-      +text-mixin($error-text-color, 48px)
+      +text-mixin($error-text-color, 40px)
 
   .user-logout
-    margin: 20px
+    margin-top: 20px
 </style>

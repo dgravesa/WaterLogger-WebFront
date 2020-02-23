@@ -55,9 +55,9 @@ export default {
 @import "~/assets/shared-text.sass"
 
 .container
-  margin: 0 auto
+  margin: 80px auto
   min-height: 100vh
-  display: flex
+  display: block
   justify-content: center
   align-items: center
   text-align: center
