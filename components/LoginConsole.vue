@@ -40,6 +40,6 @@ export default {
     width: 300px
 
   .error-message
-    +text-mixin(indianred, 18px)
+    +text-mixin($error-text-color, 18px)
     padding-top: 10px
 </style>
