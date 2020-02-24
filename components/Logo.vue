@@ -2,7 +2,7 @@
   img.waterlogger-logo(src="/waterlogger.jpg", width="245", height="245")
 </template>
 
-<style>
+<style scoped>
 .waterlogger-logo {
   animation: 500ms appear;
   margin: auto;

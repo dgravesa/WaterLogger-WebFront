@@ -49,22 +49,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '~/assets/shared-text'
-
-.container
-  margin: 80px auto
-  min-height: 100vh
-  display: block
-  justify-content: center
-  align-items: center
-  text-align: center
+@import "~/assets/shared-text"
+@import "~/assets/shared-container"
 
 .home-screen
-  display: block
-  align-items: center
-  justify-content: center
-  text-align: center
-  margin: 80px auto
+  +container-mixin(100px)
 
   .user-greeting
     .greeting

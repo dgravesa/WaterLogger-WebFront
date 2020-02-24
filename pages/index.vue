@@ -5,6 +5,8 @@
       h1.title WaterLogger
 
     LoginConsole(:error-message="loginErrorMessage" v-on:submit="attemptLogin")
+
+    p.signup-text Don't have an account? #[nuxt-link.signup-link(to="/signup") Sign up]
 </template>
 
 <script>
@@ -53,18 +55,20 @@ export default {
 
 <style lang="sass">
 @import "~/assets/shared-text.sass"
+@import "~/assets/shared-container.sass"
 
 .container
-  margin: 80px auto
-  min-height: 100vh
-  display: block
-  justify-content: center
-  align-items: center
-  text-align: center
+  +container-mixin(80px)
 
 .logo-title
   padding-bottom: 20px
 
   .title
     +text-mixin($basic-text-color, 100px)
+
+.signup-text
+  margin-top: 20px
+  +text-mixin($basic-text-color, 20px)
+  .signup-link
+    +link-mixin
 </style>
