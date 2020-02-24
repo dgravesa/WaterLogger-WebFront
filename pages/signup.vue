@@ -19,14 +19,48 @@
 </template>
 
 <script>
+import { auth } from "~/plugins/firebase";
+
 export default {
-  date() {
+  data() {
     return {
       userEmail: '',
       confirmEmail: '',
       userPassword: '',
       confirmPassword: '',
       errorMessage: '',
+    }
+  },
+  methods: {
+    submitSignup() {
+      this.errorMessage = '';
+
+      // TODO: make these conditions appear as red outlines on input fields
+      if (this.userEmail != this.confirmEmail) {
+        this.errorMessage = 'Email does not match confirm value.';
+      } else if (this.userPassword != this.confirmPassword) {
+        this.errorMessage = 'Password does not match confirm value.';
+      } else {
+        auth.createUserWithEmailAndPassword(this.userEmail, this.userPassword)
+          .then(() => {
+            this.$router.push('/userhome');
+          })
+          .catch((error) => {
+            switch (error.code) {
+              case "auth/email-already-in-use":
+                this.errorMessage = "Email is associated with an existing account.";
+                break;
+              case "auth/invalid-email":
+                this.errorMessage = "Not a valid email address.";
+                break;
+              case "auth/weak-password":
+                this.errorMessage = "Password is not strong enough.";
+                break;
+              default:
+                this.errorMessage = "Failed to create account; server error occurred."
+            }
+          });
+      }
     }
   }
 }
