@@ -78,6 +78,9 @@ export default {
     +text-mixin($basic-text-color, 64px)
     padding-bottom: 20px
 
+  .text-input-box
+    +text-input-mixin(300px)
+
   .navigation
     margin: 10px
     .login-link

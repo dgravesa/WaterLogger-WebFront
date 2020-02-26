@@ -27,6 +27,7 @@ export const mutations = {
     state.retrieveLogsErrorMessage = '';
   },
   SET_DRINKLOGS (state, drinklogs) {
+    state.drinklogs = [];
     state.drinklogs.push(...drinklogs);
     state.logsRetrieved = true;
   },
@@ -50,8 +51,24 @@ export const actions = {
         state.commit('SET_DRINKLOGS', result.data)
       })
       .catch(e => {
-        state.commit('SET_RETRIEVELOGS_ERROR', 'Unable to retrieve drink logs')
+        state.commit('SET_RETRIEVELOGS_ERROR', 'Unable to connect to service')
       });
+    });
+  },
+  SUBMIT_DRINKLOG (state, amount) {
+    auth.currentUser.getIdToken().then(token => {
+      let formData = "amt=" + amount;
+
+      // TODO: get this from configuration
+      axios.post('http://localhost:33255/drinklogs', formData, {
+        headers: {
+          'Authorization': token
+        },
+      })
+      .then(() => {
+        state.dispatch('GET_DRINKLOGS');
+      });
+      // TODO: handle connectivity errors
     });
   }
 }

@@ -30,6 +30,8 @@ export default {
 @import '~/assets/shared-input.sass'
 
 .login-console
+  .text-input-box
+    +text-input-mixin(300px)
   .error-message
     +text-mixin($error-text-color, 18px)
     padding-top: 10px
